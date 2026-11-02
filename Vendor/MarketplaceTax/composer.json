@@ -1,0 +1,14 @@
+{
+    "name": "vendor/module-marketplace-tax",
+    "description": "Custom US Marketplace Tax Engine",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Vendor\\MarketplaceTax\\": ""
+        }
+    }
+}

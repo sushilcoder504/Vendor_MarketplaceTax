@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Vendor\MarketplaceTax\Api\RateRepositoryInterface"
+                type="Vendor\MarketplaceTax\Model\Repository\RateRepository"/>
+
+    <preference for="Vendor\MarketplaceTax\Api\TaxRuleRepositoryInterface"
+                type="Vendor\MarketplaceTax\Model\Repository\TaxRuleRepository"/>
+
+    <preference for="Vendor\MarketplaceTax\Api\TaxCalculatorInterface"
+                type="Vendor\MarketplaceTax\Model\Calculator\TaxCalculator"/>
+
+<type name="Magento\Framework\Console\CommandList">
+    <arguments>
+        <argument name="commands" xsi:type="array">
+            <item name="marketplace_tax_import" xsi:type="object">
+                Vendor\MarketplaceTax\Console\Command\ImportRates
+            </item>
+
+            <item name="marketplace_tax_export" xsi:type="object">
+                Vendor\MarketplaceTax\Console\Command\ExportRates
+            </item>
+        </argument>
+    </arguments>
+</type>                
+
+</config>

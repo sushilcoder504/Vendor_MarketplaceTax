@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
+    <system>
+        <tab id="marketplace" translate="label" sortOrder="300">
+            <label>Marketplace</label>
+        </tab>
+
+        <section id="marketplace_tax"
+                 translate="label"
+                 sortOrder="100"
+                 showInDefault="1"
+                 showInWebsite="1"
+                 showInStore="0">
+
+            <label>Marketplace Tax Engine</label>
+            <tab>marketplace</tab>
+            <resource>Vendor_MarketplaceTax::config</resource>
+
+            <group id="general" translate="label" sortOrder="10">
+                <label>General Settings</label>
+
+                <field id="default_category"
+                       translate="label"
+                       type="text"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1">
+                    <label>Default Tax Category</label>
+                </field>
+
+                <field id="no_tax_states"
+                       translate="label"
+                       type="text"
+                       sortOrder="20"
+                       showInDefault="1"
+                       showInWebsite="1">
+                    <label>No Tax States</label>
+                    <comment>Comma separated state codes, e.g. OR,MT,NH,DE</comment>
+                </field>
+            </group>
+
+            <group id="locations" translate="label" sortOrder="20">
+                <label>Locations</label>
+
+                <field id="warehouse/country"
+                       type="text" sortOrder="10"
+                       showInDefault="1">
+                    <label>Warehouse Country</label>
+                </field>
+
+                <field id="warehouse/state"
+                       type="text" sortOrder="20"
+                       showInDefault="1">
+                    <label>Warehouse State</label>
+                </field>
+
+                <field id="warehouse/city"
+                       type="text" sortOrder="30"
+                       showInDefault="1">
+                    <label>Warehouse City</label>
+                </field>
+
+                <field id="warehouse/zip"
+                       type="text" sortOrder="40"
+                       showInDefault="1">
+                    <label>Warehouse ZIP</label>
+                </field>
+
+                <field id="pickup/country"
+                       type="text" sortOrder="50"
+                       showInDefault="1">
+                    <label>Pickup Country</label>
+                </field>
+
+                <field id="pickup/state"
+                       type="text" sortOrder="60"
+                       showInDefault="1">
+                    <label>Pickup State</label>
+                </field>
+
+                <field id="pickup/city"
+                       type="text" sortOrder="70"
+                       showInDefault="1">
+                    <label>Pickup City</label>
+                </field>
+
+                <field id="pickup/zip"
+                       type="text" sortOrder="80"
+                       showInDefault="1">
+                    <label>Pickup ZIP</label>
+                </field>
+            </group>
+
+            <group id="sourcing" translate="label" sortOrder="30">
+                <label>Sourcing Settings</label>
+
+                <field id="tx"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1">
+                    <label>Texas Sourcing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="shipping" translate="label" sortOrder="40">
+                <label>Shipping Tax Settings</label>
+
+                <field id="tx"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1">
+                    <label>Texas Shipping Taxable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="ny"
+                       type="select"
+                       sortOrder="20"
+                       showInDefault="1">
+                    <label>New York Shipping Taxable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>

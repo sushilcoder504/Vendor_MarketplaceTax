@@ -1,0 +1,105 @@
+{
+    "vendor_marketplace_tax_rate": {
+        "column": {
+            "rate_id": true,
+            "rate_code": true,
+            "country_code": true,
+            "state_code": true,
+            "zip_from": true,
+            "zip_to": true,
+            "level": true,
+            "rate": true,
+            "status": true,
+            "valid_from": true,
+            "valid_to": true
+        },
+        "index": {
+            "VENDOR_MARKETPLACE_TAX_RATE_COUNTRY_CODE_STATE_CODE_STATUS": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "VENDOR_MARKETPLACE_TAX_RATE_RATE_CODE": true
+        }
+    },
+    "marketplace_tax_rate": {
+        "column": {
+            "entity_id": true,
+            "rate_code": true,
+            "country": true,
+            "state": true,
+            "zip_from": true,
+            "zip_to": true,
+            "level": true,
+            "jurisdiction_name": true,
+            "rate": true,
+            "valid_from": true,
+            "valid_to": true,
+            "status": true
+        },
+        "index": {
+            "MARKETPLACE_TAX_RATE_COUNTRY_STATE_ZIP_FROM_ZIP_TO_STATUS": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MARKETPLACE_TAX_RATE_RATE_CODE": true
+        }
+    },
+    "marketplace_tax_rule": {
+        "column": {
+            "entity_id": true,
+            "rule_code": true,
+            "tax_category": true,
+            "country": true,
+            "state": true,
+            "zip_from": true,
+            "zip_to": true,
+            "treatment": true,
+            "min_unit_price": true,
+            "max_unit_price": true,
+            "priority": true,
+            "valid_from": true,
+            "valid_to": true,
+            "status": true
+        },
+        "index": {
+            "MARKETPLACE_TAX_RULE_TAX_CATEGORY_COUNTRY_STATE_STATUS_PRIORITY": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MARKETPLACE_TAX_RULE_RULE_CODE": true
+        }
+    },
+    "quote_item": {
+        "column": {
+            "marketplace_tax_amount": true,
+            "marketplace_tax_details": true
+        }
+    },
+    "sales_order_item": {
+        "column": {
+            "marketplace_tax_amount": true,
+            "marketplace_tax_details": true
+        }
+    },
+    "sales_order_item_tax_detail": {
+        "column": {
+            "entity_id": true,
+            "order_item_id": true,
+            "rule_code": true,
+            "jurisdiction_level": true,
+            "jurisdiction_name": true,
+            "rate": true,
+            "taxable_amount": true,
+            "tax_amount": true,
+            "reason": true,
+            "created_at": true
+        },
+        "index": {
+            "SALES_ORDER_ITEM_TAX_DETAIL_ORDER_ITEM_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_2A4032467BDC5EA1B53EA6E30D411EFB": true
+        }
+    }
+}

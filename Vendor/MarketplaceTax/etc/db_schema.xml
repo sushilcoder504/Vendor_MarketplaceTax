@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="marketplace_tax_rate"
+           resource="default"
+           engine="innodb"
+           comment="Marketplace Tax Rates">
+
+        <column xsi:type="int" name="entity_id" unsigned="true"
+                nullable="false" identity="true" comment="ID"/>
+
+        <column xsi:type="varchar" name="rate_code"
+                length="100" nullable="false" comment="Rate Code"/>
+
+        <column xsi:type="varchar" name="country" length="2"
+                nullable="false" comment="Country"/>
+
+        <column xsi:type="varchar" name="state" length="2"
+                nullable="false" comment="State"/>
+
+        <column xsi:type="int" name="zip_from" unsigned="true"
+                nullable="true" comment="ZIP From"/>
+
+        <column xsi:type="int" name="zip_to" unsigned="true"
+                nullable="true" comment="ZIP To"/>
+
+        <column xsi:type="varchar" name="level" length="20"
+                nullable="false" comment="Jurisdiction Level"/>
+
+        <column xsi:type="varchar" name="jurisdiction_name"
+                length="150" nullable="false" comment="Jurisdiction"/>
+
+        <column xsi:type="decimal" name="rate" precision="8"
+                scale="4" nullable="false" comment="Tax Rate"/>
+
+        <column xsi:type="date" name="valid_from"
+                nullable="true" comment="Valid From"/>
+
+        <column xsi:type="date" name="valid_to"
+                nullable="true" comment="Valid To"/>
+
+        <column xsi:type="smallint" name="status"
+                nullable="false" default="1" comment="Status"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <constraint xsi:type="unique" referenceId="MARKETPLACE_TAX_RATE_CODE">
+            <column name="rate_code"/>
+        </constraint>
+
+        <index referenceId="MARKETPLACE_TAX_RATE_ZIP_LOOKUP" indexType="btree">
+            <column name="country"/>
+            <column name="state"/>
+            <column name="zip_from"/>
+            <column name="zip_to"/>
+            <column name="status"/>
+        </index>
+
+    </table>
+
+    <table name="marketplace_tax_rule"
+           resource="default"
+           engine="innodb"
+           comment="Marketplace Taxability Rules">
+
+        <column xsi:type="int" name="entity_id" unsigned="true"
+                nullable="false" identity="true" comment="ID"/>
+
+        <column xsi:type="varchar" name="rule_code"
+                length="100" nullable="false" comment="Rule Code"/>
+
+        <column xsi:type="varchar" name="tax_category"
+                length="100" nullable="false" comment="Tax Category"/>
+
+        <column xsi:type="varchar" name="country" length="2"
+                nullable="true" comment="Country"/>
+
+        <column xsi:type="varchar" name="state" length="2"
+                nullable="true" comment="State"/>
+
+        <column xsi:type="int" name="zip_from"
+                unsigned="true" nullable="true" comment="ZIP From"/>
+
+        <column xsi:type="int" name="zip_to"
+                unsigned="true" nullable="true" comment="ZIP To"/>
+
+        <column xsi:type="varchar" name="treatment"
+                length="20" nullable="false" comment="Treatment"/>
+
+        <column xsi:type="decimal" name="min_unit_price"
+                precision="12" scale="4" nullable="true"
+                comment="Minimum Unit Price"/>
+
+        <column xsi:type="decimal" name="max_unit_price"
+                precision="12" scale="4" nullable="true"
+                comment="Maximum Unit Price"/>
+
+        <column xsi:type="int" name="priority"
+                nullable="false" default="1" comment="Priority"/>
+
+        <column xsi:type="date" name="valid_from"
+                nullable="true" comment="Valid From"/>
+
+        <column xsi:type="date" name="valid_to"
+                nullable="true" comment="Valid To"/>
+
+        <column xsi:type="smallint" name="status"
+                nullable="false" default="1" comment="Status"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <constraint xsi:type="unique" referenceId="MARKETPLACE_TAX_RULE_CODE">
+            <column name="rule_code"/>
+        </constraint>
+
+        <index referenceId="MARKETPLACE_TAX_RULE_LOOKUP" indexType="btree">
+            <column name="tax_category"/>
+            <column name="country"/>
+            <column name="state"/>
+            <column name="status"/>
+            <column name="priority"/>
+        </index>
+
+    </table>
+
+    <table name="quote_item"
+           resource="default"
+           engine="innodb"
+           comment="Quote Item">
+
+        <column xsi:type="decimal" name="marketplace_tax_amount"
+                precision="20" scale="4" nullable="false"
+                default="0" comment="Marketplace Tax Amount"/>
+
+        <column xsi:type="text" name="marketplace_tax_details"
+                nullable="true" comment="Marketplace Tax Details"/>
+
+    </table>
+
+    <table name="sales_order_item"
+           resource="default"
+           engine="innodb"
+           comment="Sales Order Item">
+
+        <column xsi:type="decimal" name="marketplace_tax_amount"
+                precision="20" scale="4" nullable="false"
+                default="0" comment="Marketplace Tax Amount"/>
+
+        <column xsi:type="text" name="marketplace_tax_details"
+                nullable="true" comment="Marketplace Tax Details"/>
+
+    </table>
+
+    <table name="sales_order_item_tax_detail"
+           resource="default"
+           engine="innodb"
+           comment="Order Item Tax Audit">
+
+        <column xsi:type="int" name="entity_id" unsigned="true"
+                nullable="false" identity="true" comment="ID"/>
+
+        <column xsi:type="int" name="order_item_id" unsigned="true"
+                nullable="false" comment="Order Item ID"/>
+
+        <column xsi:type="varchar" name="rule_code"
+                length="100" nullable="true" comment="Applied Rule"/>
+
+        <column xsi:type="varchar" name="jurisdiction_level"
+                length="20" nullable="false" comment="Jurisdiction Level"/>
+
+        <column xsi:type="varchar" name="jurisdiction_name"
+                length="150" nullable="false" comment="Jurisdiction Name"/>
+
+        <column xsi:type="decimal" name="rate"
+                precision="8" scale="4" nullable="false"
+                comment="Applied Rate"/>
+
+        <column xsi:type="decimal" name="taxable_amount"
+                precision="20" scale="4" nullable="false"
+                comment="Taxable Amount"/>
+
+        <column xsi:type="decimal" name="tax_amount"
+                precision="20" scale="4" nullable="false"
+                comment="Tax Amount"/>
+
+        <column xsi:type="varchar" name="reason"
+                length="50" nullable="true" comment="Tax Reason"/>
+
+        <column xsi:type="timestamp" name="created_at"
+                nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign"
+                    referenceId="MARKETPLACE_TAX_DETAIL_ORDER_ITEM"
+                    table="sales_order_item_tax_detail"
+                    column="order_item_id"
+                    referenceTable="sales_order_item"
+                    referenceColumn="item_id"
+                    onDelete="CASCADE"/>
+
+        <index referenceId="MARKETPLACE_TAX_DETAIL_ORDER_ITEM_IDX">
+            <column name="order_item_id"/>
+        </index>
+
+    </table>
+
+</schema>
